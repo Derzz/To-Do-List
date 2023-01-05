@@ -8,7 +8,7 @@ namespace To_Do_List.Models
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
-        [Display(Name = "Start Date test")]
+        [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 

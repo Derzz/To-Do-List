@@ -20,22 +20,50 @@ namespace To_Do_List.Controllers
         }
 
         // GET: To_Do
-        public async Task<IActionResult> Index(string searchString)
+
+        // Searches Task
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            if (_context.To_Do == null)
+            // Switches both between ascending and descending order
+            ViewBag.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
+			
+			ViewBag.DateSortParm = sortOrder == "StartDate" ? "startdate_desc" : "StartDate";
+			if (_context.To_Do == null)
             {
                 return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
             }
 
-            var movies = from m in _context.To_Do
+            var todo = from m in _context.To_Do
                          select m;
 
-            if (!String.IsNullOrEmpty(searchString))
+            // Orders all the parameters as needed with switches
+            switch (sortOrder)
             {
-                movies = movies.Where(s => s.Title!.Contains(searchString));
+                case "Title":
+                    todo = todo.OrderBy(m => m.Title); //LINQ
+                    break;
+
+                case "title_desc":
+                    todo = todo.OrderByDescending(m => m.Title);
+                    break;
+
+                case "StartDate":
+                    todo = todo.OrderBy(m => m.StartDate);
+                    break;
+
+                case "startdate_desc":
+                    todo = todo.OrderByDescending(m => m.StartDate);
+                    break;
+                    
             }
 
-            return View(await movies.ToListAsync());
+            // Function to search everything
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                todo = todo.Where(s => s.Title!.Contains(searchString));
+            }
+
+            return View(await todo.ToListAsync());
         }
 
         // GET: To_Do/Details/5
