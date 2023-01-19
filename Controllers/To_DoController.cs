@@ -28,11 +28,14 @@ namespace To_Do_List.Controllers
             ViewBag.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
 			
 			ViewBag.DateSortParm = sortOrder == "StartDate" ? "startdate_desc" : "StartDate";
+
+
 			if (_context.To_Do == null)
             {
-                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
+                return Problem("Entity set 'ToDo.ToDo'  is null.");
             }
 
+            // Creates a LINQ query to select the tasks
             var todo = from m in _context.To_Do
                          select m;
 
@@ -57,7 +60,7 @@ namespace To_Do_List.Controllers
                     
             }
 
-            // Function to search everything
+            // Function to search if 
             if (!String.IsNullOrEmpty(searchString))
             {
                 todo = todo.Where(s => s.Title!.Contains(searchString));
