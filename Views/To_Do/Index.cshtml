@@ -27,19 +27,21 @@
 	<thead>
 		<tr>
 			<th>
-				<!-- Made a link displaying the tasks in ascending order-->
+				<!-- Made a link displaying the tasks in ascending order(Title)-->
 				@Html.ActionLink(@Html.DisplayNameFor(model => model.Title), "Index", new { sortOrder = ViewBag.TitleSortParm })
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.Description)
+				<!-- Made a link displaying the dates in ascending order(Description)-->
+				@Html.ActionLink(@Html.DisplayNameFor(model => model.Description), "Index", new{sortOrder = ViewBag.DescriptionSortParm})
 			</th>
 			<th>
-				<!-- Made a link displaying the dates in ascending order-->
-				@Html.ActionLink(@Html.DisplayNameFor(model => model.StartDate), "Index", new{sortOrder = ViewBag.DateSortParm})
+				<!-- Made a link displaying the dates in ascending order(Start Date)-->
+				@Html.ActionLink(@Html.DisplayNameFor(model => model.StartDate), "Index", new{sortOrder = ViewBag.SDateSortParm})
 				
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.EndDate)
+				<!-- Made a link displaying the dates in ascending order(End Date)-->
+				@Html.ActionLink(@Html.DisplayNameFor(model => model.EndDate), "Index", new{sortOrder = ViewBag.EDateSortParm})
 			</th>
 			<th>
 				@Html.DisplayNameFor(model => model.checkbox)

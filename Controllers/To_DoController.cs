@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Controllers are used to handle browser requests, retrieve model data, call view templates that return a response
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,8 +27,12 @@ namespace To_Do_List.Controllers
         {
             // Switches both between ascending and descending order
             ViewBag.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
-			
-			ViewBag.DateSortParm = sortOrder == "StartDate" ? "startdate_desc" : "StartDate";
+
+			ViewBag.DescriptionSortParm = sortOrder == "Description" ? "description_desc" : "Description";
+
+			ViewBag.SDateSortParm = sortOrder == "StartDate" ? "startdate_desc" : "StartDate";
+
+			ViewBag.EDateSortParm = sortOrder == "EndDate" ? "enddate_desc" : "EndDate";
 
 
 			if (_context.To_Do == null)
@@ -50,6 +55,14 @@ namespace To_Do_List.Controllers
                     todo = todo.OrderByDescending(m => m.Title);
                     break;
 
+                case "Description":
+                    todo = todo.OrderBy(m => m.Description);
+                    break;
+
+                case "description_desc":
+                    todo = todo.OrderByDescending(m => m.Description);
+                    break;
+
                 case "StartDate":
                     todo = todo.OrderBy(m => m.StartDate);
                     break;
@@ -57,8 +70,16 @@ namespace To_Do_List.Controllers
                 case "startdate_desc":
                     todo = todo.OrderByDescending(m => m.StartDate);
                     break;
-                    
-            }
+
+				case "EndDate":
+					todo = todo.OrderBy(m => m.EndDate);
+					break;
+
+				case "enddate_desc":
+					todo = todo.OrderByDescending(m => m.EndDate);
+					break;
+
+			}
 
             // Function to search if 
             if (!String.IsNullOrEmpty(searchString))
