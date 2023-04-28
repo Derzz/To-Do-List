@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using To_Do_List.Data;
+using To_Do_List.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddDbContext<To_Do_ListContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("To_Do_ListContext") ?? throw new InvalidOperationException("Connection string 'To_Do_ListContext' not found.")));
 
@@ -9,6 +12,12 @@ builder.Services.AddDbContext<To_Do_ListContext>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

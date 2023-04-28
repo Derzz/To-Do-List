@@ -24,6 +24,8 @@
 
 
 @*Table Starts Here*@
+
+@*Displaying names*@
 <table class="table">
 	<thead>
 		<tr>
@@ -45,11 +47,17 @@
 				@Html.ActionLink(@Html.DisplayNameFor(model => model.EndDate), "Index", new{sortOrder = ViewBag.EDateSortParm})
 			</th>
 			<th>
+				@Html.DisplayNameFor(model => model.priority)
+			</th>
+			<th>
 				@Html.DisplayNameFor(model => model.checkbox)
 			</th>
+
+			<!-- Add line on top of options -->
 			<th></th>
 		</tr>
 	</thead>
+	@*Displaying actual items*@
 	<tbody>
 		@foreach (var item in Model)
 		{
@@ -67,7 +75,25 @@
 					@Html.DisplayFor(modelItem => item.EndDate)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.checkbox)
+					@if (item.priority == 3)
+					{
+						<p>High</p>
+					}
+					else if(item.priority == 2)
+					{
+						<p>Medium</p>
+					}
+					else if(item.priority == 1)
+					{
+						<p>Low</p>
+					}
+					else
+					{
+						<p>N/A</p>
+					}
+				</td>
+				<td>
+					@Html.CheckBoxFor(modelItem => item.checkbox)
 				</td>
 				<td>
 					<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

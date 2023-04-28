@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc;
 
 namespace To_Do_List.Models
 {
@@ -32,6 +34,14 @@ namespace To_Do_List.Models
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
+
+        [Display(Name = "Priority")]
+        [BindProperty]
+        public int priority { get; set; }
+        public void OnPost()
+        {
+            // posted value is assigned to the Number property automatically
+        }
 
         [Display(Name = "Completed?")]
         public bool checkbox { get; set; }

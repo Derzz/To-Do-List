@@ -123,7 +123,7 @@ namespace To_Do_List.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Title,Description,StartDate,EndDate,checkbox")] To_Do to_Do)
+		public async Task<IActionResult> Create([Bind("Id,Title,Description,StartDate,EndDate,checkbox,priority")] To_Do to_Do)
 		{
 			if (ModelState.IsValid)
 			{
